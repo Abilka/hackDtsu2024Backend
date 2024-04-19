@@ -1,11 +1,10 @@
 from app import app
-import db
-import api.user.register.table
-import typing
-
-@app.get("/api/user/register")
-def new_user(name: str, password: str):
-    return ''
+from api.user.register.sql import Database
+import hashlib
+@app.post("/api/user/register")
+def new_user(username: str, password: str):
+    password = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    return Database().new(username=username, password=password)
 
 
 
