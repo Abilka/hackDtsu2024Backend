@@ -16,7 +16,7 @@ def generator(size=6, chars=string.ascii_uppercase + string.digits):
 class Database(db.Database):
     def new_card(self, **kwargs):
 
-        user_id = api.user.sql.Database().get_by_token(kwargs['user_token']).id
+        user_id = kwargs['user_id']
         statement = sqlalchemy.dialects.postgresql.insert(table.Card).values(user_id=user_id).returning(table.Card.id)
         card_id = self.connect.execute(statement).fetchone()[-1]
         secret_key = hashlib.sha512(str(card_id).encode('utf-8') + str(user_id).encode('utf-8')).hexdigest()
