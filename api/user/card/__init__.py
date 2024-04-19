@@ -1,6 +1,6 @@
 from app import app
-from api.user.card.sql import Database
 from api.user.card import all
+from .sql import *
 
 @app.get("/api/user/card")
 def get_card(user_token: str):

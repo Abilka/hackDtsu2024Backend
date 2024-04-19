@@ -1,1 +1,3 @@
-from api.user import register, login, card
+from api.user import register, login, card, privileges
+
+
