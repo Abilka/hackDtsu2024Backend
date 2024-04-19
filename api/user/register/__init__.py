@@ -4,7 +4,8 @@ import hashlib
 @app.post("/api/user/register")
 def new_user(username: str, password: str):
     password = hashlib.sha256(password.encode('utf-8')).hexdigest()
-    return Database().new(username=username, password=password)
+    Database().new(username=username, password=password)
+    return {"result": True}
 
 
 
