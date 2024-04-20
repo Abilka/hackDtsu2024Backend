@@ -21,7 +21,7 @@ class User(db.Base):
     name = sqlalchemy.Column(sqlalchemy.String(256))
     family = sqlalchemy.Column(sqlalchemy.String(256))
     two_name = sqlalchemy.Column(sqlalchemy.String(256))
-    cash =  sqlalchemy.Column(sqlalchemy.String(256))
+    cash = sqlalchemy.Column(sqlalchemy.Float())
 
 class Card(db.Base):
     __tablename__ = "Card"
@@ -68,7 +68,7 @@ class LogInfo:
     events = sqlalchemy.Column(sqlalchemy.String(256))
     timestamp = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
 
-class CashLog:
+class CashLog(db.Base):
     __tablename__ = "CashLog"
 
     id = sqlalchemy.Column(sqlalchemy.Integer(), primary_key=True, autoincrement=True)
