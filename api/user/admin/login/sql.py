@@ -18,13 +18,13 @@ class Database(db.Database):
         statement = sqlalchemy.insert(table.AdminAuth).values(user_id=user_data.id).returning(table.AdminAuth.id)
         token_id = self.connect.execute(statement).fetchone()[-1]
         access_token = hashlib.sha256(str(token_id).encode('utf-8') + user_data.password.encode('utf-8')).hexdigest()
-        statement = sqlalchemy.update(table.AdminAuth).values(access_token=access_token).where(table.AdminAccount.id == token_id)
+        statement = sqlalchemy.update(table.AdminAuth).values(access_token=access_token).where(table.AdminAuth.id == token_id)
         self.connect.execute(statement)
         self.connect.commit()
         return access_token
 
     def authorization(self, **kwargs) -> str or bool:
-        statement = sqlalchemy.select(table.AdminAccount.id).where(table.AdminAccount.username == kwargs['username'] and
+        statement = sqlalchemy.select(table.AdminAccount.id).where(table.AdminAccount.username == kwargs['username'],
                                                            table.AdminAccount.password == kwargs['password'])
         result = self.connect.execute(statement).fetchall()
         if len(result) > 0:

@@ -1,5 +1,5 @@
 from app import app
-from api.user import register, login, card, privileges
+from api.user import register, login, card, privileges, admin
 from .sql import *
 @app.get("/api/user")
 def get_all_user():

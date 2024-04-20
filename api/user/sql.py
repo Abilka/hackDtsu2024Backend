@@ -9,12 +9,16 @@ class Database(db.Database):
     def get_by_token(self, token: str):
         statement = sqlalchemy.select(table.Auth.user_id).where(table.Auth.access_token == token)
         result = self.connect.execute(statement).fetchone()
-        return table.User(id=result[-1])
+        if result is not None:
+            return table.User(id=result[-1])
+        return False
 
     def get_admin_by_token(self, token: str):
         statement = sqlalchemy.select(table.AdminAuth.user_id).where(table.AdminAuth.access_token == token)
         result = self.connect.execute(statement).fetchone()
-        return table.User(id=result[-1])
+        if result is not None:
+            return table.AdminAccount(id=result[-1])
+        return False
 
 
     def select_all_user(self):
