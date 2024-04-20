@@ -7,3 +7,4 @@ class CashOperation:
     price: float
     reason: str
     okpo: int
+
