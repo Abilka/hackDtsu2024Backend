@@ -2,6 +2,8 @@ import db
 import sqlalchemy
 
 from api.user import table
+import api.user.sql
+
 class Database(db.Database):
 
     def insert_privilege(self, **kwargs):
@@ -10,6 +12,9 @@ class Database(db.Database):
 
         if not self.user_is_instance(kwargs['user_id']):
             return 'Такого пользователя не существует'
+
+        if not api.user.sql.Database().get_admin_by_token(kwargs['auth_admin']):
+            return 'Не авторизован'
 
         statement = sqlalchemy.dialects.postgresql.insert(table.Privileges).values(kwargs)
         statement = statement.on_conflict_do_nothing()
