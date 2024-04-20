@@ -77,7 +77,7 @@ class CashLog(db.Base):
     reason = sqlalchemy.Column(sqlalchemy.String(256))
     timestamp = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
     inn = sqlalchemy.Column(sqlalchemy.Integer())
-    category = sqlalchemy.Column(sqlalchemy.Integer(), default=-1)
+    category_id = sqlalchemy.Column(sqlalchemy.Integer(), default=-1)
 
 class ServiceCategory(db.Base):
     __tablename__ = "ServiceCategory"
