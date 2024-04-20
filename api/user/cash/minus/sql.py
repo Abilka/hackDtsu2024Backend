@@ -19,7 +19,7 @@ class Database(db.Database):
         values.update({'user_id': user_id})
         values.update({'price': data.price})
         values.update({'reason': data.reason})
-        values.update({'inn': data.okpo})
+        values.update({'inn': data.inn})
 
         statement = sqlalchemy.insert(table.CashLog).values(values)
         self.connect.execute(statement)

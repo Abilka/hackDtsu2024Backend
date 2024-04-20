@@ -6,5 +6,5 @@ class CashOperation:
     card_hash: str
     price: float
     reason: str
-    okpo: int
+    inn: int
 
