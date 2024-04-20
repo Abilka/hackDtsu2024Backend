@@ -4,6 +4,7 @@ from api.user import table
 import sqlalchemy.dialects.postgresql
 import sqlalchemy.orm.session
 from .obj import ReturnUser
+import api.user.register.sql
 
 class Database(db.Database):
     def get_by_token(self, token: str):
@@ -21,7 +22,9 @@ class Database(db.Database):
         return False
 
 
-    def select_all_user(self):
+    def select_all_user(self, **kwargs):
+        if not api.user.sql.Database().get_admin_by_token(kwargs['auth_admin']):
+            return 'Не авторизован'
         statement = sqlalchemy.select(table.User.id, table.User.username)
         result = self.connect.execute(statement).fetchall()
         return list(map(lambda x: ReturnUser(*x), result))

@@ -7,6 +7,7 @@ from api.user import table
 import sqlalchemy.dialects.postgresql
 import sqlalchemy.orm.session
 import sqlalchemy
+from .obj import AnswerLogin
 
 class Database(db.Database):
     def new_token(self, **kwargs):
@@ -21,12 +22,12 @@ class Database(db.Database):
         statement = sqlalchemy.update(table.AdminAuth).values(access_token=access_token).where(table.AdminAuth.id == token_id)
         self.connect.execute(statement)
         self.connect.commit()
-        return access_token
+        return AnswerLogin(access_token)
 
     def authorization(self, **kwargs) -> str or bool:
         statement = sqlalchemy.select(table.AdminAccount.id).where(sqlalchemy.and_(table.AdminAccount.username == kwargs['username'],
                                                            table.AdminAccount.password == kwargs['password']))
         result = self.connect.execute(statement).fetchall()
         if len(result) > 0:
-            return table.User(id=result[-1][-1])
+            return table.AdminAuth(id=result[-1][-1])
         return False

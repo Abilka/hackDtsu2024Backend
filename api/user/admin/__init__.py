@@ -4,7 +4,7 @@ from app import app
 
 from .login import *
 
-from api.user.register.sql import Database
+from .sql import *
 
 import hashlib
 @app.post("/api/user/admin")
@@ -14,10 +14,4 @@ def new_user(username: str, password: str):
 
     password = hashlib.sha256(password.encode('utf-8')).hexdigest()
     return Database().new(username=username, password=password)
-
-
-@app.get("/api/user/admin")
-def get_admin(username: str, password: str):
-  pass
-
 
