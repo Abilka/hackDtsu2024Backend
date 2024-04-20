@@ -1,3 +1,7 @@
+import json
+
+import fastapi
+
 import db
 import sqlalchemy
 from api.user import table
@@ -13,7 +17,8 @@ class Database(db.Database):
         user_balance = api.user.cash.sql.Database().get_balance_user(user_id)
 
         if user_balance - data.price < 0:
-            return {"result": {"message": 'Нет денег на данную операцию', "balance": user_balance}}
+            content = {"result": {"message": 'Нет денег на данную операцию', "balance": user_balance}}
+            return fastapi.Response(status_code=fastapi.status.HTTP_402_PAYMENT_REQUIRED)
 
         values = {}
         values.update({'user_id': user_id})
