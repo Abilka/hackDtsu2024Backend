@@ -3,9 +3,9 @@ from .sql import Database
 from app import app
 
 
-@app.post("/api/user/privileges/new")
-def new_privileges(data: obj.GetCategory, admin_auth):
-    return sql.Database().new(auth_admin, data)
+@app.post("/api/user/category/new")
+def create_new_category(data: obj.GetCategory, admin_auth):
+    return sql.Database().new(admin_auth, data)
 
 
 
