@@ -7,4 +7,5 @@ class CashOperation:
     price: float
     reason: str
     inn: int
+    category_id: int
 
