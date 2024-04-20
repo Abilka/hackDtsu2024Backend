@@ -4,8 +4,8 @@ from .sql import *
 
 
 @app.delete("/api/user/card/delete")
-def new_card(card_id: int):
-    return Database().delete(card_id=card_id)
+def new_card(secret_key: str):
+    return Database().delete(secret_key=secret_key)
 
 
 

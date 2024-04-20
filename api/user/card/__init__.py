@@ -1,5 +1,5 @@
 from app import app
-from api.user.card import all
+from api.user.card import all, delete
 from .sql import *
 
 
