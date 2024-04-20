@@ -16,6 +16,9 @@ class Database(db.Database):
 
         user_balance = api.user.cash.sql.Database().get_balance_user(user_id)
 
+        if user_balance is None:
+            user_balance = 0
+
         values = {}
         values.update({'user_id': user_id})
         values.update({'price': data.price})
