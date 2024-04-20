@@ -83,6 +83,6 @@ class ServiceCategory(db.Base):
     __tablename__ = "ServiceCategory"
 
     id = sqlalchemy.Column(sqlalchemy.Integer(), primary_key=True, autoincrement=True)
-    name = sqlalchemy.Column(sqlalchemy.Integer())
+    name = sqlalchemy.Column(sqlalchemy.String())
     picture = sqlalchemy.Column(sqlalchemy.String())
 

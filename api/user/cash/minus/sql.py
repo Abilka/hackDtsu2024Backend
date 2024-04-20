@@ -25,6 +25,7 @@ class Database(db.Database):
         values.update({'price': data.price})
         values.update({'reason': data.reason})
         values.update({'inn': data.inn})
+        values.update({'category_id': data.category_id})
 
         statement = sqlalchemy.insert(table.CashLog).values(values)
         self.connect.execute(statement)
