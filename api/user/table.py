@@ -21,6 +21,7 @@ class User(db.Base):
     name = sqlalchemy.Column(sqlalchemy.String(256))
     family = sqlalchemy.Column(sqlalchemy.String(256))
     two_name = sqlalchemy.Column(sqlalchemy.String(256))
+    cash=  sqlalchemy.Column(sqlalchemy.String(256))
 
 class Card(db.Base):
     __tablename__ = "Card"
