@@ -9,7 +9,7 @@ from fastapi import Response, status
 def auth_user(username: str, password: str):
     password = hashlib.sha256(password.encode('utf-8')).hexdigest()
     result = Database().new_token(username=username, password=password)
-    return Response(status_code=status.HTTP_401_UNAUTHORIZED) if not result else obj.AnswerLogin(result)
+    return Response(status_code=status.HTTP_401_UNAUTHORIZED) if not result else result
 
 
 

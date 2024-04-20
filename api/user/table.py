@@ -21,7 +21,7 @@ class User(db.Base):
     name = sqlalchemy.Column(sqlalchemy.String(256))
     family = sqlalchemy.Column(sqlalchemy.String(256))
     two_name = sqlalchemy.Column(sqlalchemy.String(256))
-    cash=  sqlalchemy.Column(sqlalchemy.String(256))
+    cash =  sqlalchemy.Column(sqlalchemy.String(256))
 
 class Card(db.Base):
     __tablename__ = "Card"
@@ -60,4 +60,21 @@ class AdminAuth(db.Base):
     access_token = sqlalchemy.Column(sqlalchemy.String(64))
     time_start = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
     time_end = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now() + datetime.timedelta(days=2))
+
+class LogInfo:
+    __tablename__ = "LogInfo"
+
+    user_id = sqlalchemy.Column(sqlalchemy.Integer())
+    events = sqlalchemy.Column(sqlalchemy.String(256))
+    timestamp = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
+
+class CashLog:
+    __tablename__ = "CashLog"
+
+    id = sqlalchemy.Column(sqlalchemy.Integer(), primary_key=True, autoincrement=True)
+    user_id = sqlalchemy.Column(sqlalchemy.Integer())
+    price = sqlalchemy.Column(sqlalchemy.Float())
+    reason = sqlalchemy.Column(sqlalchemy.String(256))
+    timestamp = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
+    okpo = sqlalchemy.Column(sqlalchemy.Integer())
 
