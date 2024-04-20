@@ -6,7 +6,7 @@ import sqlalchemy.dialects.postgresql
 
 class Database(db.Database):
     def new(self, **kwargs):
-        statement = sqlalchemy.dialects.postgresql.insert(table.AdminAccount).values(kwargs)
+        statement = sqlalchemy.dialects.postgresql.insert(table.User).values(kwargs)
         statement = statement.on_conflict_do_nothing()
         self.connect.execute(statement).fetchall()
         self.connect.commit()

@@ -42,3 +42,21 @@ class PrivilegesHistory(db.Base):
     name = sqlalchemy.Column(sqlalchemy.String(64))
     legend = sqlalchemy.Column(sqlalchemy.String(256))
     history = sqlalchemy.Column(sqlalchemy.String(256))
+
+
+class AdminAccount(db.Base):
+    __tablename__ = "AdminAccount"
+
+    id = sqlalchemy.Column(sqlalchemy.Integer(), primary_key=True, autoincrement=True)
+    username = sqlalchemy.Column(sqlalchemy.String(64), primary_key=True)
+    password = sqlalchemy.Column(sqlalchemy.String(128))
+
+class AdminAuth(db.Base):
+    __tablename__ = "AdminAuth"
+
+    id = sqlalchemy.Column(sqlalchemy.Integer(), primary_key=True)
+    user_id = sqlalchemy.Column(sqlalchemy.Integer())
+    access_token = sqlalchemy.Column(sqlalchemy.String(64))
+    time_start = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
+    time_end = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now() + datetime.timedelta(days=2))
+
