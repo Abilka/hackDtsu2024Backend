@@ -4,7 +4,7 @@ from app import app
 
 
 @app.post("/api/user/privileges/new")
-def new_privileges(data: obj.Privileges):
+def new_privileges(data: obj.Privileges, auth_admin):
     return sql.Database().new_privileges(data, auth_admin=auth_admin)
 
 

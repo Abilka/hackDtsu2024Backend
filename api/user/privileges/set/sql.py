@@ -16,7 +16,8 @@ class Database(db.Database):
         if not api.user.sql.Database().get_admin_by_token(kwargs['auth_admin']):
             return 'Не авторизован'
 
-        statement = sqlalchemy.dialects.postgresql.insert(table.Privileges).values(kwargs)
+        statement = sqlalchemy.dialects.postgresql.insert(table.Privileges).values(user_id=kwargs['user_id'],
+                                                                                   privileges_prefix=kwargs['privileges_prefix'])
         statement = statement.on_conflict_do_nothing()
         self.connect.execute(statement)
         self.connect.commit()
