@@ -6,7 +6,7 @@ import db
 from api.user import table
 import sqlalchemy.dialects.postgresql
 import sqlalchemy.orm.session
-
+import sqlalchemy
 
 class Database(db.Database):
     def new_token(self, **kwargs):
@@ -24,8 +24,8 @@ class Database(db.Database):
         return access_token
 
     def authorization(self, **kwargs) -> str or bool:
-        statement = sqlalchemy.select(table.AdminAccount.id).where(table.AdminAccount.username == kwargs['username'],
-                                                           table.AdminAccount.password == kwargs['password'])
+        statement = sqlalchemy.select(table.AdminAccount.id).where(sqlalchemy.and_(table.AdminAccount.username == kwargs['username'],
+                                                           table.AdminAccount.password == kwargs['password']))
         result = self.connect.execute(statement).fetchall()
         if len(result) > 0:
             return table.User(id=result[-1][-1])

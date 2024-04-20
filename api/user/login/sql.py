@@ -24,8 +24,8 @@ class Database(db.Database):
         return access_token
 
     def authorization(self, **kwargs) -> str or bool:
-        statement = sqlalchemy.select(table.User.id).where(table.User.username == kwargs['username'],
-                                                           table.User.password == kwargs['password'])
+        statement = sqlalchemy.select(table.User.id).where(sqlalchemy.and_(table.User.username == kwargs['username'],
+                                                           table.User.password == kwargs['password']))
         result = self.connect.execute(statement).fetchall()
         if len(result) > 0:
             return table.User(id=result[-1][-1])
