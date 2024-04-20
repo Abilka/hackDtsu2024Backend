@@ -9,14 +9,14 @@ class Database(db.Database):
         if not user_id:
             return "Нет такой карты"
 
-        return self.get_privileges_by_user_id(user_id[-1])
+        return self.get_privileges_by_user_id(user_id)
 
     def get_user_id_by_card(self, card_hash: str):
         statement = sqlalchemy.select(table.Card.user_id).where(table.Card.secret_key == card_hash)
         result = self.connect.execute(statement).fetchone()
         if result is None:
             return False
-        return result
+        return result[-1]
 
     def get_privileges_by_user_id(self, user_id: int):
         statement = sqlalchemy.select(table.Privileges.privileges_prefix).where(table.Privileges.user_id == user_id)
