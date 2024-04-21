@@ -75,7 +75,7 @@ class CashLog(db.Base):
     user_id = sqlalchemy.Column(sqlalchemy.Integer())
     price = sqlalchemy.Column(sqlalchemy.Float())
     reason = sqlalchemy.Column(sqlalchemy.String(256))
-    timestamp = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
+    timestamp = sqlalchemy.Column(sqlalchemy.DateTime(timezone=True), default=sqlalchemy.func.now())
     inn = sqlalchemy.Column(sqlalchemy.Integer())
     category_id = sqlalchemy.Column(sqlalchemy.Integer(), default=-1)
 
