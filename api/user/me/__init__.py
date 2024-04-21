@@ -7,7 +7,7 @@ from .obj import *
 
 from fastapi import Response, status
 
-@app.get("/api/user/me")
+@app.get("/api/user/me", tags=['Пользователь'])
 def get_user_info(auth_token: str):
     return sql.Database().get(auth_token)
 
