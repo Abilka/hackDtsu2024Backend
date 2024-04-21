@@ -23,5 +23,6 @@ class Database(db.Database):
         statement = sqlalchemy.update(table.Card).values(secret_key=secret_key).where(table.Card.id == card_id)
         self.connect.execute(statement)
         self.connect.commit()
+        self.connect.close()
         return api.user.card.obj.Card(secret_key)
 

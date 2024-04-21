@@ -31,4 +31,5 @@ class Database(db.Database):
         statement = sqlalchemy.update(table.User).where(table.User.id == user_id).values(cash=user_balance + data.price)
         self.connect.execute(statement)
         self.connect.commit()
+        self.connect.close()
         return {'result': {'balance': {'card_hash': data.card_hash, 'balance': user_balance + data.price}}}

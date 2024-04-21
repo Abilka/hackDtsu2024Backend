@@ -14,5 +14,6 @@ class Database(db.Database):
         statement = statement.on_conflict_do_nothing()
         self.connect.execute(statement)
         self.connect.commit()
+        self.connect.close()
         return data
 

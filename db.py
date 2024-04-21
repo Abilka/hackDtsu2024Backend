@@ -7,6 +7,7 @@ class Database:
     def __init__(self):
         self.engine = sqlalchemy.create_engine(setting.DATABASE_CONNECT)
         self.connect = self.engine.connect()
+        self.connect.autocommit = True
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.connect.close()

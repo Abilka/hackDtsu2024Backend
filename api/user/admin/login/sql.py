@@ -22,6 +22,7 @@ class Database(db.Database):
         statement = sqlalchemy.update(table.AdminAuth).values(access_token=access_token).where(table.AdminAuth.id == token_id)
         self.connect.execute(statement)
         self.connect.commit()
+        self.connect.close()
         return AnswerLogin(access_token)
 
     def authorization(self, **kwargs) -> str or bool:
